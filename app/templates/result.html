@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>نتيجة الاستخراج</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <main class="card">
+    {% if kind == "error" %}
+      <h1>حدث خطأ</h1>
+      <p class="err">{{ message }}</p>
+      <a class="btn" href="{{ url_for('app.index') }}">العودة</a>
+    {% else %}
+      <h1>نتيجة «كود الطلب»</h1>
+
+      <div class="result-box">
+        <div class="value">
+          {% if value %}
+            <span class="big">{{ value }}</span>
+          {% else %}
+            <span class="big muted">لم يتم العثور على كود</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <table class="meta">
+        <tr><th>الملف</th><td>{{ filename }}</td></tr>
+        <tr><th>الاتجاه المكتشف</th><td>{{ orientation }}°</td></tr>
+        <tr><th>التسمية</th><td>{{ label or "لم يتم العثور عليها" }}</td></tr>
+      </table>
+
+      {% if not value %}
+        <p class="note">لم يتم العثور على الرقم المجاور لكلمة «كود الطلب» في هذه الصورة
+        (جودة المسح ضعيفة أو التسمية غير واضحة).</p>
+      {% endif %}
+
+      {% if preview %}
+        <h2>معاينة بعد التصحيح</h2>
+        <img class="preview" src="{{ url_for('app.preview', name=preview) }}" alt="معاينة">
+      {% endif %}
+
+      <a class="btn" href="{{ url_for('app.index') }}">صورة أخرى</a>
+    {% endif %}
+  </main>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

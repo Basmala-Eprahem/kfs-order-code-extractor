@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>بوابة محافظة كفر الشيخ الرقمية — استخراج كود الطلب</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="page">
+
+    <header class="site-header">
+      <div class="header-inner">
+        <img class="logo" src="{{ url_for('static', filename='kfs_logo.png') }}" alt="شعار محافظة كفر الشيخ">
+        <div class="header-titles">
+          <h1 class="portal">بوابة محافظة كفر الشيخ الرقمية</h1>
+          <p class="portal-sub">خدمة استخراج كود الطلب من شهادات التسجيل المكاني</p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>معالجة دفعة كاملة</h2>
+        <p class="sub">اختر صورًا متعددة: كل صورة يُستخرج منها الكود، تُعاد تسميتها بالكود (مع الحفاظ على صيغتها الأصلية)، والملفات الفاشلة تُحفظ في مجلد <code>failed/</code>، ثم ينزل <b>ZIP واحد</b> فيه النتائج وملف <code>results.csv</code>.</p>
+
+        <form id="batch-form">
+          <div class="dropzone" id="batch-zone">
+            <input type="file" name="images" id="batch-input" multiple accept="image/*" required>
+            <span>اسحب صورًا متعددة هنا أو اضغط للاختيار</span>
+          </div>
+          <p class="file-count" id="batch-count"></p>
+          <button type="submit" id="batch-start" disabled>بدء المعالجة</button>
+        </form>
+
+        <div id="batch-progress" class="hidden">
+          <div class="progress-bar"><div id="progress-fill"></div></div>
+          <p class="progress-text" id="progress-text"></p>
+        </div>
+        <div id="batch-done" class="hidden"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      محافظة كفر الشيخ — بوابة المحافظة الرقمية
+    </footer>
+
+  </div>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
